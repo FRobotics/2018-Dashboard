@@ -56,12 +56,13 @@ let displayValues = [
  * @param {DisplayValue[]} values
  */
 let scan = (parent, values) => {
+  console.log('test')
   for (let v of values) {
     if (v.values != null) {
       scan(`${parent}${v.name}/`, v.values)
     } else {
       let value = NetworkTables.getValue(`${parent}${v.name}`, v.defaultValue)
-      document.getElementById(v.name).textContent = `${v.name}: ${value}`
+      document.getElementById(v.name).value = value
     }
   }
 }
