@@ -1,84 +1,129 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>FRC Dashboard</title>
-    <link href="css/style.css" rel="stylesheet">
-  </head>
-  <body>
-    <div id="timer">41:50</div>
-    <header>
-      <!-- Tells whether robot is connected to dashboard. -->
-      <div id="robot-state">Not Connected!</div>
-    </header>
-    <!--
-      You'll need to mess around with the CSS of #camera (found in css/style.css) to get it to work.
-      More explanation in that CSS rule.
-    -->
-    <div id="camera"></div>
-    <!-- The main body of the dashboard, by default contains the gyro monitor and the robot diagram -->
-    <article>
-      <!-- Gyroscope -->
-      <svg id="compressor">
-        <circle cx="85" cy="85" r="83"></circle>
-        <circle cx="85" cy="85" r="50"></circle>
-        <rect id="compressor-needle" x="80" y="5" width="10" height="80"></rect>
-        <text id="compressor-number" x="85" y="115">0 PSI</text>
-      </svg>
-      <!-- Example robot diagram, arm moves when encoder value changes -->
-      <svg id="robot-diagram" width="332" height="450">
-        <text x="40" y="340">Example SVG Robot Diagram</text>
-        <rect x="75" y="360" width="230" height="40"></rect>
-        <rect x="85" y="370" width="210" height="40"></rect>
-        <rect id="robot-arm" x="5" y="375" width="80" height="10"></rect>
-        <circle cx="100" cy="410" r="25"></circle>
-        <circle cx="260" cy="410" r="25"></circle>
-        <rect x="60" y="380" width="250" height="30"></rect>
-        <text id="team" x="185" y="405" text-anchor="middle">4150</text>
-      </svg>
-    </article>
-    <!-- The sidebar of the dashboard. Designed for smaller control elements like selection boxes and small buttons. -->
-    <aside>
-      <!--
-        Example button which toggles /SmartDashboard/exampleValue NetworkTables value.
-        The <p> below then says the value.
-      -->
-      <div id="example-section">
-        <p id="example-readout">Elevator Control</p>
-        <button id="example-button">Enabled</button>
-      </div>
-      <!-- Autonomous selector -->
-      <div class="select-container">
-        <select id="auto-select">
-          <option>N/A</option>
-          <option>Up</option>
-          <option>Down</option>
-          <option>Left</option>
-          <option>Right</option>
-          <!-- This gets populated by JS -->
-        </select>
-      </div>
-      <div>
-        <p>Arm Status</p>
-        <label class="switch">
-            <input type="checkbox">
-            <span class="slider round"></span>
-          </label>
-      </div>
-      <div>
-        <p id="leftEncoder"></p>
-        <p id="rightEncoder"></p>
-        <p id="leftMotor"></p>
-        <p id="rightMotor"></p>
-      </div>
-    </aside>
-    <div id="login">
-      <input id="connect-address" type="text" value="localhost" disabled>
-      <button id="connect" disabled>Connecting</button>
+
+<head>
+  <meta charset="utf-8">
+  <title>FRC Dashboard</title>
+  <link href="css/style.css" rel="stylesheet">
+  <script src="networktables/networktables.js"></script>
+  <script src="connection.js"></script>
+  <script src="ui.js"></script>
+  <script src='index.js'></script>
+</head>
+
+<body>
+  <div>
+    <div style="float:left">
+      <h2>Encoders</h2>
+      <br>
+      <p>
+        Right encoder:
+        <input type="number" id="rightEncoder" disabled>
+      </p>
+      <br>
+      <p>
+        Left Encoder:
+        <input type="number" id="leftEncoder" disabled>
+      </p>
+      <br>
+      <h2>Motors</h2>
+      <br>
+      <p>
+        Right motor:
+        <input type="number" id="rightMotor" disabled>
+      </p>
+      <br>
+      <p>
+        Left motor:
+        <input type="number" id="leftMotor" disabled>
+      </p>
+      <br>
+      <h2 align=right>Drive position control</h2>
+      <br>
+      <p>
+        Target
+        <input type="number" id="drivePosControl/target">
+      </p>
+      <br>
+      <p>
+        Max Speed
+        <input type="number" id="drivePosControl/maxSpeed">
+      </p>
+      <br>
+      <p>
+        Minimum speed
+        <input type="number" id="drivePosControl/minSpeed">
+      </p>
+      <br>
+      <p>
+        Rate
+        <input type="number" id="drivePosControl/rate">
+      </p>
+      <br>
+      <p>
+        dead band
+        <input type="number" id="drivePosControl/deadband">
+      </p>
+      <br>
+      <p>
+        shift
+        <input type="checkbox" id="shift">
+      </p>
+      <br>
+      <p>
+        Compressor
+        <input type="checkbox" id="gyro">
+      </p>
     </div>
-    <script src="networktables/networktables.js"></script>
-    <script src="connection.js"></script>
-    <script src="ui.js"></script>
-    <script src="index.js"></script>
-  </body>
-</ht>
+    <div style="float: right">
+      <h2>Arm</h2>
+      <br> open arm
+      <input type="checkbox" id="open">
+      <br>
+      <p>
+        Arm is in progress
+        <input type="checkbox" id="inProgress">
+      </p>
+      <br>
+      <h2>Controller</h2>
+      <br>
+      <h3>
+        Left Stick
+      </h3>
+      <br>
+      <p>
+        y axis
+        <input type="number" id="controller/leftStick/yAxis" disabled>
+      </p>
+      <br>
+      <p>
+        x axis
+        <input type="number" id="controller/leftStick/xAxis" disabled>
+      </p>
+      <br>
+      <h3>
+        Right Stick
+      </h3>
+      <br>
+      <p>
+        y axis
+        <input type="number" id="controller/rightStick/yAxis" disabled>
+      </p>
+      <br>
+      <p>
+        x axis
+        <input type="number" id="controller/rightStick/xAxis" disabled>
+      </p>
+      <h3>
+        Buttons
+      </h3>
+      <p>
+        A
+        <input type="checkbox" id="controller/buttons/A">
+      </p>
+      <br>
+    </div>
+  </div>
+</body>
+
+</html>
