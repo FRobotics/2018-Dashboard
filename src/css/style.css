@@ -165,8 +165,8 @@ body.login #login {
 .switch {
     position: relative;
     display: inline-block;
-    width: 50px;
-    height: 20px;
+    width: 40px;
+    height: 15px;
 }
 
   /* Hide default HTML checkbox */
@@ -188,8 +188,8 @@ body.login #login {
   .slider:before {
     position: absolute;
     content: "";
-    height: 13px;
-    width: 16px;
+    height: 8px;
+    width: 9px;
     left: 4px;
     bottom: 4px;
     background-color: rgb(255, 255, 255);

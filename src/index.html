@@ -5,10 +5,6 @@
   <meta charset="utf-8">
   <title>FRC Dashboard</title>
   <link href="css/style.css" rel="stylesheet">
-  <script src="networktables/networktables.js"></script>
-  <script src="connection.js"></script>
-  <script src="ui.js"></script>
-  <script src='index.js'></script>
 </head>
 
 <body>
@@ -67,22 +63,43 @@
       <br>
       <p>
         shift
-        <input type="checkbox" id="shift">
+        <label class="switch">
+          <input type="checkbox" id="shift">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         Compressor
-        <input type="checkbox" id="gyro">
+        <label class="switch">
+          <input type="checkbox" id="gyro">
+          <span class="slider round"></span>
+        </label>
+      </p>
+      <br>
+      <p>
+        Robot Connected:
+        <label class="switch">
+          <input type="checkbox" id="connected" disabled>
+          <span class="slider round"></span>
+        </label>
       </p>
     </div>
     <div style="float: right">
       <h2>Arm</h2>
       <br> open arm
-      <input type="checkbox" id="open">
+      <label class="switch">
+        <input type="checkbox" id="open">
+        <span class="slider round"></span>
+      </label>
       <br>
       <p>
         Arm is in progress
-        <input type="checkbox" id="inProgress">
+        <label class="switch">
+          <input type="checkbox" id="inProgress">
+          <span class="slider round"></span>
+
+        </label>
       </p>
       <br>
       <h2>Controller</h2>
@@ -120,42 +137,66 @@
       <br>
       <p>
         A
-        <input type="checkbox" id="controller/buttons/A">
+        <label class="switch">
+          <input type="checkbox" id="controller/buttons/A">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         B
-        <input type="checkbox" id="controller/buttons/B">
+        <label class="switch">
+          <input type="checkbox" id="controller/buttons/B">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         X
-        <input type="checkbox" id="controller/buttons/X">
+        <label class="switch">
+          <input type="checkbox" id="controller/buttons/X">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         Y
-        <input type="checkbox" id="controller/buttons/Y">
+        <label class="switch">
+          <input type="checkbox" id="controller/buttons/Y">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         Left Bumper
-        <input type="checkbox" id="controller/buttons/leftBumper">
+        <label class="switch">
+          <input type="checkbox" id="controller/buttons/leftBumper">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         Right Bumper
-        <input type="checkbox" id="controller/buttons/rightBumper">
+        <label class="switch">
+          <input type="checkbox" id="controller/buttons/rightBumper">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         Start
-        <input type="checkbox" id="controller/buttons/start">
+        <label class="switch">
+          <input type="checkbox" id="controller/buttons/start">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         Back
-        <input type="checkbox" id="controller/buttons/back">
+        <label class="switch">
+          <input type="checkbox" id="controller/buttons/back">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <h3>
@@ -164,16 +205,28 @@
       <br>
       <p>
         Target Found
-        <input type="checkbox" id="vision/targetFound">
+        <label class="switch">
+          <input type="checkbox" id="vision/targetFound">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
       <p>
         On Target
-        <input type="checkbox" id="vision/onTarget">
+        <label class="switch">
+          <input type="checkbox" id="vision/onTarget">
+          <span class="slider round"></span>
+        </label>
       </p>
       <br>
     </div>
   </div>
 </body>
+
+<footer>
+  <script src="networktables/networktables.js"></script>
+  <script src="connection.js"></script>
+  <script src='ui.js'></script>
+</footer>
 
 </html>

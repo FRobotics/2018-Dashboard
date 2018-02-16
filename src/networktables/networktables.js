@@ -26,6 +26,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
       delete keys[mesg.key]
     })
     ipc.on('update', (ev, mesg) => {
+      console.log(mesg)
       let temp = keys[mesg.key]
       temp.flags = mesg.flags
       temp.val = mesg.val
