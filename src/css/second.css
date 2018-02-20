@@ -1,0 +1,23 @@
+
+::-webkit-scrollbar {
+    display: none;
+}
+body {
+    font: 16px sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: rgb(255, 255, 255);
+    overflow: hidden;
+    background: rgb(34, 34, 34);
+}
+button, input[type="text"], input[type="number"], .select-container, select {
+    color: rgb(255, 255, 255);
+    background: rgb(68, 68, 68);
+    border: none;
+    font-size: 14px;
+    padding: 6px 8px;
+    cursor: pointer;
+    outline: 0;
+}

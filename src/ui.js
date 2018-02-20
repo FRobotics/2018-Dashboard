@@ -162,3 +162,18 @@ let refresh = () => {
 
 refresher = new Updater(refresh, 200)
 refresher.start()
+
+document.getElementById("auto-select").onchange = (value) => {
+  switch (value.target.value) {
+    case "None":
+      document.getElementById("auto-body").textContent = ""
+      break;
+    case "Drive Straight":
+      document.getElementById("auto-body").textContent = "Distance:"
+      break;
+    case "Turn":
+      break;
+    case "Set Arm":
+      break;
+  }
+}

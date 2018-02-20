@@ -1,8 +1,4 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -16,39 +12,9 @@ body {
     overflow: hidden;
     background: rgb(34, 34, 34);
 }
-button, input[type="text"], input[type="number"], .select-container, select {
-    color: rgb(255, 255, 255);
-    background: rgb(68, 68, 68);
-    border: none;
-    font-size: 14px;
-    padding: 6px 8px;
-    cursor: pointer;
-    outline: 0;
-}
-.select-container {
-    padding: 0;
-    display: inline-block;
-}
-select {
-    border: none;
-    background: none;
-    color: rgb(0, 0, 0);
-    height: 30px;
-}
-input[type="text"], input[type="number"] {
-    cursor: text;
-}
-input[type="checkbox"] {
-    -webkit-filter: saturate(0);
-    filter: saturate(0);
-}
-/* Major interface panes, aside, article, header, etc. */
-body > * {
-    padding: 10px;
-    position: fixed;
-    overflow: scroll;
-    background: rgb(34, 34, 34);
-}
+
+
+
 #timer {
     font-family: monospace;
     display: block;
