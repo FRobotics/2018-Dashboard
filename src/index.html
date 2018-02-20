@@ -8,59 +8,69 @@
 </head>
 
 <body>
+    <div class="select-container" style="float: right">
+        <select id="auto-select">
+          <option>Drive Straight</option>
+          <option>Turn</option>
+          <option>Set Arm</option>
+         
+        </select>
+      
+    
+        </div>hjhu
   <div>
     <div style="float:left">
       <h2>Encoders</h2>
-      <br>
+      
       <p>
         Right encoder:
         <input type="number" id="rightEncoder" disabled>
       </p>
-      <br>
+      
       <p>
         Left Encoder:
         <input type="number" id="leftEncoder" disabled>
       </p>
-      <br>
+      
       <h2>Motors</h2>
-      <br>
+      
       <p>
         Right motor:
         <input type="number" id="rightMotor" disabled>
       </p>
-      <br>
+      
       <p>
         Left motor:
         <input type="number" id="leftMotor" disabled>
       </p>
-      <br>
+      
       <h2 align=left>Drive position control</h2>
-      <br>
+      
       <p>
         Target
         <input type="number" id="drivePosControl/target">
       </p>
-      <br>
+      
       <p>
         Max Speed
         <input type="number" id="drivePosControl/maxSpeed">
       </p>
-      <br>
+      
       <p>
         Minimum speed
         <input type="number" id="drivePosControl/minSpeed">
       </p>
-      <br>
+      
       <p>
         Rate
         <input type="number" id="drivePosControl/rate">
       </p>
-      <br>
+      
       <p>
         dead band
         <input type="number" id="drivePosControl/deadband">
       </p>
-      <br>
+      
       <p>
         shift
         <label class="switch">
@@ -68,7 +78,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         Compressor
         <label class="switch">
@@ -76,7 +86,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         Robot Connected:
         <label class="switch">
@@ -85,14 +95,14 @@
         </label>
       </p>
     </div>
-    <div style="float: right">
+    <div style="float: middle">
       <h2>Arm</h2>
-      <br> open arm
+       open arm
       <label class="switch">
         <input type="checkbox" id="open">
         <span class="slider round"></span>
       </label>
-      <br>
+      
       <p>
         Arm is in progress
         <label class="switch">
@@ -101,32 +111,32 @@
 
         </label>
       </p>
-      <br>
+      
       <h2>Controller</h2>
-      <br>
+      
       <h3>
         Left Stick
       </h3>
-      <br>
+      
       <p>
         y axis
         <input type="number" id="controller/leftStick/yAxis" disabled>
       </p>
-      <br>
+      
       <p>
         x axis
         <input type="number" id="controller/leftStick/xAxis" disabled>
       </p>
-      <br>
+      
       <h3>
         Right Stick
       </h3>
-      <br>
+      
       <p>
         y axis
         <input type="number" id="controller/rightStick/yAxis" disabled>
       </p>
-      <br>
+      
       <p>
         x axis
         <input type="number" id="controller/rightStick/xAxis" disabled>
@@ -134,7 +144,7 @@
       <h3>
         Buttons
       </h3>
-      <br>
+      
       <p>
         A
         <label class="switch">
@@ -142,7 +152,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         B
         <label class="switch">
@@ -150,7 +160,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         X
         <label class="switch">
@@ -158,7 +168,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         Y
         <label class="switch">
@@ -166,7 +176,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         Left Bumper
         <label class="switch">
@@ -174,7 +184,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         Right Bumper
         <label class="switch">
@@ -182,7 +192,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         Start
         <label class="switch">
@@ -190,7 +200,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         Back
         <label class="switch">
@@ -198,11 +208,11 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <h3>
         Vision
       </h3>
-      <br>
+      
       <p>
         Target Found
         <label class="switch">
@@ -210,7 +220,7 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
       <p>
         On Target
         <label class="switch">
@@ -218,15 +228,20 @@
           <span class="slider round"></span>
         </label>
       </p>
-      <br>
+      
     </div>
   </div>
+ 
+ 
+
+  
 </body>
 
 <footer>
   <script src="networktables/networktables.js"></script>
   <script src="connection.js"></script>
   <script src='ui.js'></script>
+  <script src='tab.js'></script>
 </footer>
 
 </html>

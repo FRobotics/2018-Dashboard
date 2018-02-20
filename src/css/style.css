@@ -1,8 +1,4 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -15,151 +11,15 @@ body {
     color: rgb(255, 255, 255);
     overflow: hidden;
     background: rgb(34, 34, 34);
+
 }
-button, input[type="text"], input[type="number"], .select-container, select {
-    color: rgb(255, 255, 255);
-    background: rgb(68, 68, 68);
-    border: none;
-    font-size: 14px;
-    padding: 6px 8px;
-    cursor: pointer;
-    outline: 0;
-}
-.select-container {
-    padding: 0;
-    display: inline-block;
-}
-select {
-    border: none;
-    background: none;
-    color: rgb(0, 0, 0);
-    height: 30px;
-}
-input[type="text"], input[type="number"] {
-    cursor: text;
-}
-input[type="checkbox"] {
-    -webkit-filter: saturate(0);
-    filter: saturate(0);
-}
-/* Major interface panes, aside, article, header, etc. */
-body > * {
-    padding: 10px;
-    position: fixed;
-    overflow: scroll;
-    background: rgb(34, 34, 34);
-}
-#timer {
-    font-family: monospace;
-    display: block;
-    height: 20vh;
-    width: 30vw;
-    top: 0;
-    left: 0;
-    font-size: 20vh;
-    line-height: .8;
-}
-header {
-    width: 20vw;
-    height: 20vh;
-    top: 0;
-    left: 30vw;
-    color: rgb(255, 255, 255);
-}
-#camera {
-    padding: 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 50vw;
-    height: 80vh;
-    overflow: hidden;
-    background-color: rgb(51, 51, 51);
-    /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
-    /*background-image: url('LINK TO CAMERA SOURCE HERE');*/
-}
-article {
-    top: 0;
-    left: 50vw;
-    height: 100vh;
-    width: 35vw;
-}
-svg * {
-    stroke: rgb(255, 255, 255);
-    fill: #222;
-    stroke-width: 2;
-    -webkit-transform-origin: center;
-    -ms-transform-origin: center;
-    transform-origin: center;
-}
-text {
-    font-size: 16px;
-    letter-spacing: 2px;
-    stroke: none;
-    fill: white;
-}
-#compressor {
-    width: 175px;
-    height: 175px;
-    margin-left: 30px;
-    margin-top: 15px;
-}
-#compressor-needle {
-    -webkit-transform-origin: bottom;
-    -ms-transform-origin: bottom;
-    transform-origin: bottom;
-}
-#compressor-number {
-    font-size: 25px;
-    text-anchor: middle;
-}
-#robot-diagram {
-    position: absolute;
-    bottom: 1px;
-    right: 1vw;
-}
-#robot-arm {
-    -webkit-transform-origin: right;
-    -ms-transform-origin: right;
-    transform-origin: right;
-}
+
 #team {
     font-size: 28px;
     letter-spacing: -1px;
 }
-aside {
-    right: 0;
-    top: 0;
-    width: 15vw;
-    height: 100vh;
-}
-aside > * {
-    margin-bottom: 20px;
-}
-#login {
-    position: fixed;
-    display: none;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.8)
-}
-body.login #login {
-    display: flex;
-}
-#login :disabled {
-    opacity: 0.6;
-}
-#login > * {
-    height: 40px;
-}
-#login > button {
-    margin-left: 5px;
-}
+
+
 /* The switch */
 /* The switch - the box around the slider */
 .switch {
@@ -219,38 +79,51 @@ body.login #login {
   .slider.round:before {
     border-radius: 50%;
   }
-/* Style the tab */
-.tab {
-    overflow: hidden;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-}
-
-/* Style the buttons that are used to open the tab content */
-.tab button {
-    background-color: inherit;
-    float: left;
+/* Dropdown Button */
+.dropbtn {
+    background-color: rgb(85, 85, 85);
+    color: white;
+    padding: 16px;
+    font-size: 16px;
     border: none;
-    outline: none;
     cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
 }
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
+/* Dropdown button on hover & focus */
+.dropbtn:hover, .dropbtn:focus {
+    background-color: rgb(67, 67, 67);
 }
 
-/* Create an active/current tablink class */
-.tab button.active {
-    background-color: #ccc;
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+    position: relative;
+    display: inline-block;
 }
 
-/* Style the tab content */
-.tabcontent {
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
     display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;
-} 
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd}
+
+/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+.show {display:block;}
+
+
+
+
