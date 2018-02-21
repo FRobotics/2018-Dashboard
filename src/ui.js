@@ -156,8 +156,22 @@ let scan = (parent, values) => {
   }
 }
 
+let commands = []
+
+let updateCommands = () => {
+  let html = ''
+  for(let command of commands) {
+    /** @type {string[]} */
+    let parts = command.split(':')
+    let name = parts.splice(0, 1)[0]
+    html += `\n<h4>${name}</h4>\n<ul>\n<li>${parts.join('\n<li>')}\n</ul>`
+  }
+  document.getElementById('command-list').innerHTML = html
+}
+
 let refresh = () => {
   scan('', displayValues)
+  updateCommands()
 }
 
 refresher = new Updater(refresh, 200)
@@ -166,14 +180,53 @@ refresher.start()
 document.getElementById("auto-select").onchange = (value) => {
   switch (value.target.value) {
     case "None":
-      document.getElementById("auto-body").textContent = ""
-      break;
+      document.getElementById("auto-body").innerHTML = ''
+      break
     case "Drive Straight":
-      document.getElementById("auto-body").textContent = "Distance:"
-      break;
+      document.getElementById("auto-body").innerHTML = '<p>Distance <input type="number" id="autoPart1"></p>'
+      break
     case "Turn":
-      break;
+      document.getElementById("auto-body").innerHTML = '<p>Angle <input type="number" id="autoPart1"></p>'
+        + '<p>Turn Left <label class="switch">' +
+        '<input type="checkbox" id="inProgress"><span class="slider round"></span></label></p>'
+      break
     case "Set Arm":
-      break;
+      document.getElementById("auto-body").innerHTML = '<p>Direction <input type="number" id="autoPart1"></p>'
+        + '<p>Wait <input type="number" id="autoPart2"></p>'
+      break
   }
+}
+
+document.getElementById('add-command').onclick = () => {
+  let name = "none"
+  switch (document.getElementById("auto-select").value) {
+    case "Drive Straight":
+      name = "driveStraight"
+      break
+    case "Turn":
+      name = "turn"
+      break
+    case "Set Arm":
+      name = "setArm"
+      break
+  }
+  let parts = [name]
+  for (let i = 1; document.getElementById(`autoPart${i}`) != null; i++) {
+    let element = document.getElementById(`autoPart${i}`)
+    switch (element.type) {
+      case "number":
+        parts.push(element.value)
+        break
+      case "checkbox":
+        parts.push(element.checked)
+        break
+    }
+  }
+  commands.push(parts.join(':'))
+  NetworkTables.putValue("commands", commands)
+}
+
+document.getElementById('reset-commands').onclick = () => {
+  commands = []
+  NetworkTables.putValue("commands", commands)
 }

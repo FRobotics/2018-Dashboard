@@ -6,18 +6,25 @@
   <title>FRC Dashboard</title>
   <link href="css/second.css" rel="stylesheet">
 </head>
-<body>
-  <div class="select-container" style="float: right">
-    <select id="auto-select">
-      <option>None</option>
-      <option>Drive Straight</option>
-      <option>Turn</option>
-      <option>Set Arm</option>
-    </select>
-    <div id="auto-body"></div>
-  </div>
-  <div align="right">
 
+<body>
+  <div style="float:right; width: 300px">
+    <div class="select-container">
+      <select id="auto-select">
+        <option>None</option>
+        <option>Drive Straight</option>
+        <option>Turn</option>
+        <option>Set Arm</option>
+      </select>
+    </div>
+    <div id="auto-body"></div>
+    <br>
+    <button id="add-command">add</button>
+    <h2>Commands</h2>
+    <div id="command-list">
+
+    </div>
+    <button id="reset-commands">reset</button>
   </div>
   <div>
     <div style="float:left">
