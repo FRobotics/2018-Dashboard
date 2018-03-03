@@ -35,8 +35,8 @@ class Updater {
 let displayValues = [
   { name: 'leftEncoder', defaultValue: 0 },
   { name: 'rightEncoder', defaultValue: 0 },
-  { name: 'leftMotor', defaultValue: 0 },
-  { name: 'rightMotor', defaultValue: 0 },
+  { name: 'leftMotor', defaultValue: 1 },
+  { name: 'rightMotor', defaultValue: 2 },
   { name: 'shift', defaultValue: false },
   { name: 'compressor', defaultValue: false },
   { name: 'gyro', defaultValue: 0 },
@@ -132,9 +132,9 @@ let scan = (parent, values) => {
               value = element.textContent
               break
           }
-          NetworkTables.putValue(name, value)
+          NetworkTables.putValue(`SmartDashboard/${name}`, value)
         } else {
-          let value = NetworkTables.getValue(name, v.defaultValue)
+          let value = NetworkTables.getValue(`SmartDashboard/${name}`, v.defaultValue)
           let element = document.getElementById(name)
           switch (element.type) {
             case "number":

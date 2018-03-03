@@ -20,4 +20,21 @@ button, input[type="text"], input[type="number"], .select-container, select {
     padding: 6px 8px;
     cursor: pointer;
     outline: 0;
+    width: 50%;
+}
+.column {
+    padding: 5px;
+    float: left;
+}
+.group {
+    background-color: #131313;
+    border-radius: 10px;
+    border-color: #666666;
+    border-width: 2px;
+    border-style: solid;
+    padding: 3px;
+    width: 23vw
+}
+h2 {
+    text-align: center;
 }

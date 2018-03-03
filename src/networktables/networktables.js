@@ -7,7 +7,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
     let connected = false
     let globalListeners = []
     let keyListeners = {}
-    let robotAddress = 'roboRIO-9150-FRC.local'
+    let robotAddress = '10.91.50.2'
     ipc.send('ready')
     ipc.on('connected', (ev, con) => {
       connected = con
