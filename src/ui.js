@@ -33,10 +33,25 @@ class Updater {
 
 /** @type {DisplayValue} */
 let displayValues = [
-  { name: 'leftEncoder', defaultValue: 0 },
-  { name: 'rightEncoder', defaultValue: 0 },
-  { name: 'leftMotor', defaultValue: 1 },
-  { name: 'rightMotor', defaultValue: 2 },
+  {
+    name: 'motors',
+    values: [
+      {
+        name: 'right',
+        values: [
+          { name: 'speed' },
+          { name: 'encoder' }
+        ]
+      },
+      {
+        name: 'left',
+        values: [
+          { name: 'speed' },
+          { name: 'encoder' }
+        ]
+      }
+    ]
+  },
   { name: 'shift', defaultValue: false },
   { name: 'compressor', defaultValue: false },
   { name: 'gyro', defaultValue: 0 },
@@ -132,9 +147,9 @@ let scan = (parent, values) => {
               value = element.textContent
               break
           }
-          NetworkTables.putValue(`SmartDashboard/${name}`, value)
+          NetworkTables.putValue(`/SmartDashboard/${name}`, value)
         } else {
-          let value = NetworkTables.getValue(`SmartDashboard/${name}`, v.defaultValue)
+          let value = NetworkTables.getValue(`/SmartDashboard/${name}`, v.defaultValue)
           let element = document.getElementById(name)
           switch (element.type) {
             case "number":
@@ -160,7 +175,7 @@ let commands = []
 
 let updateCommands = () => {
   let html = ''
-  for(let command of commands) {
+  for (let command of commands) {
     /** @type {string[]} */
     let parts = command.split(':')
     let name = parts.splice(0, 1)[0]
@@ -169,7 +184,79 @@ let updateCommands = () => {
   document.getElementById('command-list').innerHTML = html
 }
 
+let scanVars = () => {
+  const prefix = '/SmartDashboard/vars/'
+  let obj = {}
+  for (let key of NetworkTables.getKeys()) {
+    if (key.startsWith(prefix)) {
+      let name = key.slice(prefix.length)
+      let levels = name.split('/')
+      /**
+       * @param {string[]} remainingLevels 
+       */
+      let assignKeys = (remainingLevels, finishedLevels = []) => {
+        let currentObj = {}
+        let currentLevel = remainingLevels.shift()
+        finishedLevels.push(currentLevel)
+        if (remainingLevels.length === 0) {
+          currentObj[currentLevel] = {
+            path: key
+          }
+        } else {
+          currentObj[currentLevel] = assignKeys(remainingLevels)
+        }
+        return currentObj
+      }
+      let obj2 = assignKeys(levels)
+      let deepAssign = (base, obj) => {
+        for(let key in obj) {
+          if(base[key] != null){
+            base[key] = deepAssign(base[key], obj[key])
+          } else {
+            base[key] = obj[key]
+          }
+        }
+        return base
+      }
+      obj = deepAssign(obj, obj2)
+    }
+  }
+  varsHtml = ''
+  let createHTML = (obj) => {
+    for (let key in obj) {
+      let name = key.toLowerCase().replace('_', ' ')
+      name = name.charAt(0).toUpperCase() + name.slice(1)
+      varsHtml += `<div class="inner-group">\n`
+      if (obj[key].path != null) {
+        varsHtml += `  ${name}\n`
+        let value = NetworkTables.getValue(`${obj[key].path}`)
+        switch (typeof (value)) {
+          case "number":
+            varsHtml += `  <input type="number" value=${value} disabled>\n`
+            break
+          case "boolean":
+            varsHtml += `  <label class="switch">\n`
+              + `  <input type="checkbox" checked=${value}>\n`
+              + `  <span class="slider round"></span>\n`
+              + `  </label>\n`
+            break
+          case "string":
+            varsHtml += `  <input type="text" textContent="${value}" disabled>\n`
+            break
+        }
+      } else {
+        varsHtml += `  <h2>${name}</h2>\n`
+        createHTML(obj[key])
+      }
+      varsHtml += `</div>\n`
+    }
+  }
+  createHTML(obj)
+  document.getElementById('dashboard-vars').innerHTML = varsHtml
+}
+
 let refresh = () => {
+  if(robotConnected) scanVars()
   scan('', displayValues)
   updateCommands()
 }

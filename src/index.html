@@ -11,48 +11,12 @@
   <div style="overflow:scroll; height: 100vh">
     <div class="column">
       <div class="group">
-        <h2>Encoders</h2>
-        <p>
-          Right Encoder Value:
-          <input type="number" id="rightEncoder" disabled>
-        </p>
-        <p>
-          Left Encoder Value:
-          <input type="number" id="leftEncoder" disabled>
-        </p>
-      </div>
-      <div class="group">
-        <h2>Motors</h2>
-        <p>
-          Right Motor Speed:
-          <input type="number" id="rightMotor" disabled>
-        </p>
-
-        <p>
-          Left Motor Speed:
-          <input type="number" id="leftMotor" disabled>
-        </p>
-      </div>
-      <div class="group">
-        <h2>Arm</h2>
-        open arm
-        <label class="switch">
-          <input type="checkbox" id="open">
-          <span class="slider round"></span>
-        </label>
-
-        <p>
-          Arm is in progress
-          <label class="switch">
-            <input type="checkbox" id="inProgress">
-            <span class="slider round"></span>
-
-          </label>
-        </p>
+        <h2>Network Table Variables</h2>
+        <div id="dashboard-vars"></div>
       </div>
     </div>
     <div class="column">
-      <div class="group">
+      <div class="group" id="connection-div">
         <h2>Connection</h2>
         <p>
           Robot Connected:
@@ -66,119 +30,6 @@
           Team Number:
           <input type="number" id="team-number">
         </p>
-      </div>
-      <div class="group">
-        <h2>Compressor</h2>
-        <p>
-          Compressor
-          <label class="switch">
-            <input type="checkbox" id="gyro">
-            <span class="slider round"></span>
-          </label>
-        </p>
-      </div>
-    </div>
-    <div class="column">
-      <div class="group">
-        <h2>Controller</h2>
-
-        <h3>
-          Left Stick
-        </h3>
-
-        <p>
-          y axis
-          <input type="number" id="controller/leftStick/yAxis" disabled>
-        </p>
-
-        <p>
-          x axis
-          <input type="number" id="controller/leftStick/xAxis" disabled>
-        </p>
-
-        <h3>
-          Right Stick
-        </h3>
-
-        <p>
-          y axis
-          <input type="number" id="controller/rightStick/yAxis" disabled>
-        </p>
-
-        <p>
-          x axis
-          <input type="number" id="controller/rightStick/xAxis" disabled>
-        </p>
-        <h3>
-          Buttons
-        </h3>
-
-        <p>
-          A
-          <label class="switch">
-            <input type="checkbox" id="controller/buttons/A">
-            <span class="slider round"></span>
-          </label>
-          B
-          <label class="switch">
-            <input type="checkbox" id="controller/buttons/B">
-            <span class="slider round"></span>
-          </label>
-          X
-          <label class="switch">
-            <input type="checkbox" id="controller/buttons/X">
-            <span class="slider round"></span>
-          </label>
-          Y
-          <label class="switch">
-            <input type="checkbox" id="controller/buttons/Y">
-            <span class="slider round"></span>
-          </label>
-        </p>
-        <p>
-          Left Bumper
-          <label class="switch">
-            <input type="checkbox" id="controller/buttons/leftBumper">
-            <span class="slider round"></span>
-          </label>
-        </p>
-
-        <p>
-          Right Bumper
-          <label class="switch">
-            <input type="checkbox" id="controller/buttons/rightBumper">
-            <span class="slider round"></span>
-          </label>
-        </p>
-
-        <p>
-          Start
-          <label class="switch">
-            <input type="checkbox" id="controller/buttons/start">
-            <span class="slider round"></span>
-          </label>
-          Back
-          <label class="switch">
-            <input type="checkbox" id="controller/buttons/back">
-            <span class="slider round"></span>
-          </label>
-        </p>
-      </div>
-    </div>
-    <div class="column">
-      <div class="group">
-        <h2>Command Creator</h2>
-        <div class="select-container">
-          <select id="auto-select">
-            <option>None</option>
-            <option>Drive Straight</option>
-            <option>Turn</option>
-            <option>Set Arm</option>
-          </select>
-        </div>
-        <div id="auto-body"></div>
-        <br>
-        <button id="add-command">add</button>
       </div>
       <div class="group">
         <h2>Drive position control</h2>
@@ -214,6 +65,24 @@
             <span class="slider round"></span>
           </label>
         </p>
+      </div>
+    </div>
+    <div class="column">
+    </div>
+    <div class="column">
+      <div class="group">
+        <h2>Command Creator</h2>
+        <div class="select-container">
+          <select id="auto-select">
+            <option>None</option>
+            <option>Drive Straight</option>
+            <option>Turn</option>
+            <option>Set Arm</option>
+          </select>
+        </div>
+        <div id="auto-body"></div>
+        <br>
+        <button id="add-command">add</button>
       </div>
       <div class="group">
         <h2>Commands</h2>

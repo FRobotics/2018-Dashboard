@@ -43,6 +43,7 @@ function createWindow () {
     let connectFunc = () => {
       console.log('Sending status')
       mainWindow.webContents.send('connected', con)
+      //mainWindow.toggleDevTools()
 
             // Listens to the changes coming from the client
       client.addListener(clientDataListener)
@@ -80,12 +81,15 @@ function createWindow () {
     client.Update(mesg.id, mesg.val)
   })
   ipc.on('error', (ev, error) => {
-    console.log(error)
+    console.error(error)
+  })
+  ipc.on('msg', (ev, msg) => {
+    console.log(msg)
   })
     // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1366,
-    height: 570,
+    height: 530,
         // 1366x570 is a good standard height, but you may want to change this to fit your DriverStation's screen better.
         // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
         // The window is closed until the python server is ready
