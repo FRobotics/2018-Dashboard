@@ -27,6 +27,7 @@ function onRobotConnection(connected) {
 // On click try to connect and disable the input and the button
 connect.onclick = () => {
   ipc.send('connect', `roborio-${document.getElementById('team-number').value}-frc.local`);
+  connect.disabled = true
   connect.value = 'connecting...'
 }
 

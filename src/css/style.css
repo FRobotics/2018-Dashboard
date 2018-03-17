@@ -12,9 +12,9 @@ body {
     background: #222222;
 }
 input[type="button"], input[type="text"], input[type="number"] {
-    width: 48%;
+    width: 45%;
 }
-input[type="text"], input[type="number"] {
+input[type="text"], input[type="number"], .switch {
     float: right;
 }
 input[type="button"]:hover {
