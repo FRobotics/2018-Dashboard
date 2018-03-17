@@ -33,25 +33,6 @@ class Updater {
 
 /** @type {DisplayValue} */
 let displayValues = [
-  {
-    name: 'motors',
-    values: [
-      {
-        name: 'right',
-        values: [
-          { name: 'speed' },
-          { name: 'encoder' }
-        ]
-      },
-      {
-        name: 'left',
-        values: [
-          { name: 'speed' },
-          { name: 'encoder' }
-        ]
-      }
-    ]
-  },
   { name: 'shift', defaultValue: false },
   { name: 'compressor', defaultValue: false },
   { name: 'gyro', defaultValue: 0 },
@@ -179,14 +160,27 @@ let updateCommands = () => {
     /** @type {string[]} */
     let parts = command.split(':')
     let name = parts.splice(0, 1)[0]
-    html += `\n<h4>${name}</h4>\n<ul>\n<li>${parts.join('\n<li>')}\n</ul>`
+    switch (name) {
+      case "driveStraight":
+        parts[0] = `Distance: ${parts[0]}`
+        break
+      case "turn":
+        parts[0] = `Angle: ${parts[0]}`
+        parts[1] = `Turn Left: ${parts[1]}`
+        break
+      case "setArm":
+        parts[0] = `Direction: ${parts[0]}`
+        parts[1] = `Wait: ${parts[1]}`
+        break
+    }
+    html += `\n<div class="inner-group">\n<h4>${name}</h4>\n<ul>\n<li>${parts.join('\n<li>')}\n</ul>\n</div>`
   }
   document.getElementById('command-list').innerHTML = html
 }
 
-let scanVars = () => {
-  const prefix = '/SmartDashboard/vars/'
-  let obj = {}
+let scanVars = (prefix, id) => {
+  let vars = {}
+  let vars2 = {}
   for (let key of NetworkTables.getKeys()) {
     if (key.startsWith(prefix)) {
       let name = key.slice(prefix.length)
@@ -218,7 +212,7 @@ let scanVars = () => {
         }
         return base
       }
-      obj = deepAssign(obj, obj2)
+      vars = deepAssign(vars, obj2)
     }
   }
   varsHtml = ''
@@ -226,7 +220,6 @@ let scanVars = () => {
     for (let key in obj) {
       let name = key.toLowerCase().replace('_', ' ')
       name = name.charAt(0).toUpperCase() + name.slice(1)
-      varsHtml += `<div class="inner-group">\n`
       if (obj[key].path != null) {
         varsHtml += `  ${name}\n`
         let value = NetworkTables.getValue(`${obj[key].path}`)
@@ -244,19 +237,24 @@ let scanVars = () => {
             varsHtml += `  <input type="text" textContent="${value}" disabled>\n`
             break
         }
+        varsHtml+='<br>\n'
       } else {
+        varsHtml += `<div class="inner-group">\n`
         varsHtml += `  <h2>${name}</h2>\n`
         createHTML(obj[key])
+        varsHtml += `</div>\n`
       }
-      varsHtml += `</div>\n`
     }
   }
-  createHTML(obj)
-  document.getElementById('dashboard-vars').innerHTML = varsHtml
+  createHTML(vars)
+  document.getElementById(id).innerHTML = varsHtml
 }
 
 let refresh = () => {
-  if(robotConnected) scanVars()
+  if(robotConnected) {
+    scanVars('/SmartDashboard/vars/', 'dashboard-vars')
+    scanVars('/SmartDashboard/vars2/', 'dashboard-vars2')
+  }
   scan('', displayValues)
   updateCommands()
 }
@@ -264,8 +262,8 @@ let refresh = () => {
 refresher = new Updater(refresh, 200)
 refresher.start()
 
-document.getElementById("auto-select").onchange = (value) => {
-  switch (value.target.value) {
+let updateCommandInfo = (command) => {
+  switch (command) {
     case "None":
       document.getElementById("auto-body").innerHTML = ''
       break
@@ -275,7 +273,7 @@ document.getElementById("auto-select").onchange = (value) => {
     case "Turn":
       document.getElementById("auto-body").innerHTML = '<p>Angle <input type="number" id="autoPart1"></p>'
         + '<p>Turn Left <label class="switch">' +
-        '<input type="checkbox" id="inProgress"><span class="slider round"></span></label></p>'
+        '<input type="checkbox" id="autoPart2"><span class="slider round"></span></label></p>'
       break
     case "Set Arm":
       document.getElementById("auto-body").innerHTML = '<p>Direction <input type="number" id="autoPart1"></p>'
@@ -284,8 +282,14 @@ document.getElementById("auto-select").onchange = (value) => {
   }
 }
 
+document.getElementById("auto-select").onchange = (value) => {
+  updateCommandInfo(value.target.value)
+}
+
+updateCommandInfo('Drive Straight')
+
 document.getElementById('add-command').onclick = () => {
-  let name = "none"
+  let name = "error"
   switch (document.getElementById("auto-select").value) {
     case "Drive Straight":
       name = "driveStraight"

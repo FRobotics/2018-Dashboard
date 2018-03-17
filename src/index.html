@@ -4,15 +4,21 @@
 <head>
   <meta charset="utf-8">
   <title>FRC Dashboard</title>
-  <link href="css/second.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
 </head>
 
 <body>
   <div style="overflow:scroll; height: 100vh">
     <div class="column">
       <div class="group">
-        <h2>Network Table Variables</h2>
+        <h2>NT Variables - Other</h2>
         <div id="dashboard-vars"></div>
+      </div>
+    </div>
+    <div class="column">
+      <div class="group">
+        <h2>NT Variables - Input</h2>
+        <div id="dashboard-vars2"></div>
       </div>
     </div>
     <div class="column">
@@ -72,24 +78,25 @@
     <div class="column">
       <div class="group">
         <h2>Command Creator</h2>
-        <div class="select-container">
-          <select id="auto-select">
-            <option>None</option>
-            <option>Drive Straight</option>
-            <option>Turn</option>
-            <option>Set Arm</option>
-          </select>
-        </div>
+        <select id="auto-select">
+          <option>Drive Straight</option>
+          <option>Turn</option>
+          <option>Set Arm</option>
+        </select>
         <div id="auto-body"></div>
         <br>
-        <button id="add-command">add</button>
+        <div class="centeredButton">
+          <input type="button" value="add" class="centeredButton" id="add-command">
+        </div>
       </div>
       <div class="group">
         <h2>Commands</h2>
         <div id="command-list">
 
         </div>
-        <button id="reset-commands">reset</button>
+        <div class="centeredButton">
+          <input type="button" value="reset" class="centeredButton" id="reset-commands">
+        </div>
       </div>
     </div>
   </div>
