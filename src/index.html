@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <title>FRC Dashboard</title>
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/slider.css" rel="stylesheet">
 </head>
 
 <body>
@@ -28,14 +29,17 @@
           Robot Connected:
           <label class="switch">
             <input type="checkbox" id="connected" disabled>
-            <span class="slider round"></span>
+            <span class="slider"></span>
           </label>
-          <input type="button" value="Connect" id="connect">
+          <input type="button" value="Connect" id="connect" disabled>
         </p>
         <p>
           Team Number:
           <input type="number" id="team-number">
         </p>
+      </div>
+      <div class="group">
+        <h1 id="timer">00:00</h1>
       </div>
       <div class="group">
         <h2>Drive position control</h2>
@@ -68,7 +72,7 @@
           shift
           <label class="switch">
             <input type="checkbox" id="shift">
-            <span class="slider round"></span>
+            <span class="slider"></span>
           </label>
         </p>
       </div>
@@ -104,9 +108,10 @@
 
 <footer>
   <script src="networktables/networktables.js"></script>
-  <script src="connection.js"></script>
-  <script src='ui.js'></script>
-  <script src='tab.js'></script>
+  <script src="js/command.js"></script>
+  <script src="js/connection.js"></script>
+  <script src="js/nt.js"></script>
+  <script src='js/refresh.js'></script>
 </footer>
 
 </html>

@@ -12,10 +12,16 @@ body {
     background: #222222;
 }
 input[type="button"], input[type="text"], input[type="number"] {
-    width: 40%;
+    width: 48%;
+}
+input[type="text"], input[type="number"] {
+    float: right;
 }
 input[type="button"]:hover {
     background: #666666;
+}
+input[type="button"]:disabled {
+    background: #222222;
 }
 input[type="button"], input[type="text"], input[type="number"], select {
     color: #ffffff;
@@ -31,7 +37,7 @@ select, .centeredButton input[type="button"] {
     width: 70%;
 }
 .column {
-    padding: 5px;
+    padding: 0.2vw;
     float: left;
 }
 .group {
@@ -40,17 +46,17 @@ select, .centeredButton input[type="button"] {
     width: 22.5vw;
 }
 .inner-group {
-    border-radius: 10px;
+    border-radius: 1vw;
     background-color: #302f2f;
     border-color: #797979;
 }
 .group, .inner-group {
     border-width: 2px;
     border-style: solid;
-    padding: 3px;
+    padding: 0.5vw;
     margin: 3px;
 }
-h2, h4 {
+h1, h2, h4 {
     text-align: center;
 }
 .enabled {

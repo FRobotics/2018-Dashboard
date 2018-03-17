@@ -12,22 +12,29 @@ function onRobotConnection(connected) {
   ipc.send('msg', connected ? 'Robot connected!' : 'Robot disconnected.');
   document.getElementById('connected').checked = connected
   robotConnected = connected
-  connect.disabled = false
   connect.value = "connect"
+  let connectionDiv = document.getElementById('connection-div')
   if (connected) {
-    document.getElementById('connection-div').classList.add('enabled')
-    document.getElementById('connection-div').classList.remove('disabled')
+    connectionDiv.classList.add('enabled')
+    connectionDiv.classList.remove('disabled')
   } else {
-    document.getElementById('connection-div').classList.add('disabled')
-    document.getElementById('connection-div').classList.remove('enabled')
+    connectionDiv.classList.add('disabled')
+    connectionDiv.classList.remove('enabled')
     document.getElementById('dashboard-vars').innerHTML = ''
   }
-
 }
 
 // On click try to connect and disable the input and the button
 connect.onclick = () => {
   ipc.send('connect', `roborio-${document.getElementById('team-number').value}-frc.local`);
-  connect.disabled = true
-  connect.value = "connecting..."
+  connect.value = 'connecting...'
+}
+
+var updateConnection = () => {
+  if (
+    document.getElementById("team-number").value.toString().length > 0
+    && !robotConnected
+    && connect.value !== 'connecting...'
+  ) connect.disabled = false
+  else connect.disabled = true
 }

@@ -37,32 +37,32 @@ let clientDataListener = (key, val, valType, mesgType, id, flags) => {
     flags
   })
 }
-function createWindow () {
-    // Attempt to connect to the localhost
+function createWindow() {
+  // Attempt to connect to the localhost
   client.start((con, err) => {
     let connectFunc = () => {
       console.log('Sending status')
       mainWindow.webContents.send('connected', con)
       //mainWindow.toggleDevTools()
 
-            // Listens to the changes coming from the client
+      // Listens to the changes coming from the client
       client.addListener(clientDataListener)
     }
 
-        // If the Window is ready than send the connection status to it
+    // If the Window is ready than send the connection status to it
     if (ready) {
       connectFunc()
     } else connected = connectFunc
   })
-    // When the script starts running in the window set the ready variable
+  // When the script starts running in the window set the ready variable
   ipc.on('ready', (ev, mesg) => {
     console.log('NetworkTables is ready')
     ready = mainWindow != null
-        // Send connection message to the window if if the message is ready
+    // Send connection message to the window if if the message is ready
     if (connected) connected()
     connected = null
   })
-    // When the user chooses the address of the bot than try to connect
+  // When the user chooses the address of the bot than try to connect
   ipc.on('connect', (ev, address, port) => {
     console.log(`Trying to connect to ${address}` + (port ? ':' + port : ''))
     let callback = (connected, err) => {
@@ -86,33 +86,33 @@ function createWindow () {
   ipc.on('msg', (ev, msg) => {
     console.log(msg)
   })
-    // Create the browser window.
+  // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 1366,
     height: 530,
-        // 1366x570 is a good standard height, but you may want to change this to fit your DriverStation's screen better.
-        // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
-        // The window is closed until the python server is ready
+    // 1366x570 is a good standard height, but you may want to change this to fit your DriverStation's screen better.
+    // It's best if the dashboard takes up as much space as possible without covering the DriverStation application.
+    // The window is closed until the python server is ready
     show: false
   })
-    // Move window to top (left) of screen.
+  // Move window to top (left) of screen.
   mainWindow.setPosition(0, 0)
-    // Load window.
+  // Load window.
   mainWindow.loadURL(`file://${__dirname}/index.html`)
-    // Once the python server is ready, load window contents.
+  // Once the python server is ready, load window contents.
   mainWindow.once('ready-to-show', () => {
     console.log('main window is ready to be shown')
     mainWindow.show()
   })
 
-    // Remove menu
+  // Remove menu
   mainWindow.setMenu(null)
-    // Emitted when the window is closed.
+  // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     console.log('main window closed')
-        // Dereference the window object, usually you would store windows
-        // in an array if your app supports multi windows, this is the time
-        // when you should delete the corresponding element.
+    // Dereference the window object, usually you would store windows
+    // in an array if your app supports multi windows, this is the time
+    // when you should delete the corresponding element.
     mainWindow = null
     ready = false
     client.removeListener(clientDataListener)
@@ -133,13 +133,13 @@ app.on('ready', () => {
 
 // Quit when all windows are closed.
 app.on('window-all-closed', function () {
-    // On OS X it is common for applications and their menu bar
-    // to stay active until the user quits explicitly with Cmd + Q.
-    // Not like we're creating a consumer application though.
-    // Let's just kill it anyway.
-    // If you want to restore the standard behavior, uncomment the next line.
+  // On OS X it is common for applications and their menu bar
+  // to stay active until the user quits explicitly with Cmd + Q.
+  // Not like we're creating a consumer application though.
+  // Let's just kill it anyway.
+  // If you want to restore the standard behavior, uncomment the next line.
 
-    // if (process.platform !== 'darwin')
+  // if (process.platform !== 'darwin')
   app.quit()
 })
 
@@ -148,7 +148,7 @@ app.on('quit', function () {
 })
 
 app.on('activate', function () {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
+  // On OS X it's common to re-create a window in the app when the
+  // dock icon is clicked and there are no other windows open.
   if (mainWindow == null) createWindow()
 })
