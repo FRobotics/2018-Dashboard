@@ -23,6 +23,9 @@ let commandTypes = {
     }
 }
 
+document.getElementById('auto-select').innerHTML =
+    Object.keys(commandTypes).map(type => `<option>${commandTypes[type].name}</option>`)
+
 var updateCommands = () => {
     let html = ''
     for (let command of commands) {
@@ -52,7 +55,7 @@ document.getElementById("auto-select").onchange = (value) => {
     updateCommandInfo(value.target.value)
 }
 
-updateCommandInfo('Drive Straight')
+updateCommandInfo(commandTypes.driveStraight.name)
 
 document.getElementById('add-command').onclick = () => {
     let command = document.getElementById("auto-select").value
