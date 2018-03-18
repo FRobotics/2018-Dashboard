@@ -1,7 +1,26 @@
+var loadFiles = (files) => {
+    let currentPromise = loadFile(files.shift())
+    for (let file of files) {
+        currentPromise = currentPromise.then(() => { loadFile(files.shift()) })
+    }
+}
+
+let loadFile = (file) => {
+    return new Promise((resolve, reject) => {
+        var script = document.createElement('script');
+        script.onload = function () {
+            resolve()
+        };
+        script.src = `js/${file}.js`;
+
+        document.head.appendChild(script);
+    })
+}
+
 let pagesLoading = 0
 let pagesDone = 0
 
-let insertCards = (cards, column) => {
+var insertCards = (cards, column) => {
     let firstCard = cards.shift()
     let currentPromise = insertCard(firstCard.file, column, firstCard.id)
     for (let card of cards) {
@@ -11,6 +30,8 @@ let insertCards = (cards, column) => {
         })
     }
 }
+
+var onpagesready
 
 let insertCard = (file, column, id) => {
     return new Promise((resolve, reject) => {
@@ -34,23 +55,3 @@ let insertCard = (file, column, id) => {
         xhr.send();
     })
 }
-
-insertCards([
-    {file: 'ntvOther'}
-], 'ntv-other')
-
-insertCards([
-    {file: 'ntvInput'}
-], 'ntv-input')
-
-insertCards([
-    {file: 'connection', id: 'connection-div'},
-    {file: 'timer'},
-    {file: 'positionControl'}
-], 'main')
-
-insertCards([
-    {file: 'commandCreator'},
-    {file: 'commandList'},
-    {file: 'asdfghjkl;'}
-], 'command')

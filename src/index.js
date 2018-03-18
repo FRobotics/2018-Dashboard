@@ -1,22 +1,3 @@
-let loadFiles = (files) => {
-    let currentPromise = loadFile(files.shift())
-    for (let file of files) {
-        currentPromise = currentPromise.then(() => { loadFile(files.shift()) })
-    }
-}
-
-let loadFile = (file) => {
-    return new Promise((resolve, reject) => {
-        var script = document.createElement('script');
-        script.onload = function () {
-            resolve()
-        };
-        script.src = `js/${file}.js`;
-
-        document.head.appendChild(script);
-    })
-}
-
 onpagesready = () => {
     loadFiles([
         'networktables',
@@ -27,4 +8,21 @@ onpagesready = () => {
     ])
 }
 
-loadFile('loadPages')
+insertCards([
+    {file: 'ntvOther'}
+], 'ntv-other')
+
+insertCards([
+    {file: 'ntvInput'}
+], 'ntv-input')
+
+insertCards([
+    {file: 'connection', id: 'connection-div'},
+    {file: 'timer'},
+    {file: 'positionControl'}
+], 'main')
+
+insertCards([
+    {file: 'commandCreator'},
+    {file: 'commandList'}
+], 'command')

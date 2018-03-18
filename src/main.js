@@ -43,7 +43,6 @@ function createWindow() {
     let connectFunc = () => {
       console.log('Sending status')
       mainWindow.webContents.send('connected', con)
-      mainWindow.toggleDevTools()
 
       // Listens to the changes coming from the client
       client.addListener(clientDataListener)
@@ -106,7 +105,7 @@ function createWindow() {
   })
 
   // Remove menu
-  mainWindow.setMenu(null)
+  //mainWindow.setMenu(null)
   // Emitted when the window is closed.
   mainWindow.on('closed', () => {
     console.log('main window closed')
