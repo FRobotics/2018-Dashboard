@@ -10,107 +10,15 @@
 
 <body>
   <div style="overflow:scroll; height: 100vh">
-    <div class="column">
-      <div class="group">
-        <h2>NT Variables - Other</h2>
-        <div id="dashboard-vars"></div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="group">
-        <h2>NT Variables - Input</h2>
-        <div id="dashboard-vars2"></div>
-      </div>
-    </div>
-    <div class="column">
-      <div class="group" id="connection-div">
-        <h2>Connection</h2>
-        <p>
-          Robot Connected:
-          <label class="switch">
-            <input type="checkbox" id="connected" disabled>
-            <span class="slider"></span>
-          </label>
-        </p>
-        <p>
-          Team Number:
-          <input type="number" id="team-number">
-        </p>
-        <p class="centeredButton">
-          <input type="button" value="Connect" id="connect" disabled>
-        </p>
-      </div>
-      <div class="group">
-        <h1 id="timer">00:00</h1>
-      </div>
-      <div class="group">
-        <h2>Drive position control</h2>
-        <p>
-          Target
-          <input type="number" id="drivePosControl/target">
-        </p>
-
-        <p>
-          Max Speed
-          <input type="number" id="drivePosControl/maxSpeed">
-        </p>
-
-        <p>
-          Minimum speed
-          <input type="number" id="drivePosControl/minSpeed">
-        </p>
-
-        <p>
-          Rate
-          <input type="number" id="drivePosControl/rate">
-        </p>
-
-        <p>
-          dead band
-          <input type="number" id="drivePosControl/deadband">
-        </p>
-
-        <p>
-          shift
-          <label class="switch">
-            <input type="checkbox" id="shift">
-            <span class="slider"></span>
-          </label>
-        </p>
-      </div>
-    </div>
-    <div class="column">
-    </div>
-    <div class="column">
-      <div class="group">
-        <h2>Command Creator</h2>
-        <select id="auto-select">
-        </select>
-        <div id="auto-body"></div>
-        <br>
-        <div class="centeredButton">
-          <input type="button" value="add" class="centeredButton" id="add-command">
-        </div>
-      </div>
-      <div class="group">
-        <h2>Commands</h2>
-        <div id="command-list">
-
-        </div>
-        <div class="centeredButton">
-          <input type="button" value="reset" class="centeredButton" id="reset-commands">
-        </div>
-      </div>
-    </div>
+    <div class="column" id="ntv-other-column"></div>
+    <div class="column" id="ntv-input-column"></div>
+    <div class="column" id="main-column"></div>
+    <div class="column" id="command-column"></div>
   </div>
 </body>
 
 <footer>
-  <script src="networktables/networktables.js"></script>
-  <script src="js/command.js"></script>
-  <script src="js/connection.js"></script>
-  <script src="js/nt.js"></script>
-  <script src='js/refresh.js'></script>
+  <script src='index.js'></script>
 </footer>
 
 </html>

@@ -43,7 +43,7 @@ function createWindow() {
     let connectFunc = () => {
       console.log('Sending status')
       mainWindow.webContents.send('connected', con)
-      //mainWindow.toggleDevTools()
+      mainWindow.toggleDevTools()
 
       // Listens to the changes coming from the client
       client.addListener(clientDataListener)

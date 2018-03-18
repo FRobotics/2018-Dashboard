@@ -1,3 +1,61 @@
+var displayValues = [
+    {
+      name: 'drivePosControl',
+      values: [
+        { name: 'target', defaultValue: 0, input: true },
+        { name: 'maxSpeed', defaultValue: 0, input: true },
+        { name: 'minSpeed', defaultValue: 0, input: true },
+        { name: 'rate', defaultValue: 0, input: true },
+        { name: 'deadband', defaultValue: 0, input: true }
+      ]
+    }
+]
+
+var scan = (parent, values) => {
+    for (let v of values) {
+      let name = `${parent}${v.name}`
+      if (v.values != null) {
+        scan(`${name}/`, v.values)
+      } else {
+        if (document.getElementById(name) != null) {
+          if (v.input) {
+            let element = document.getElementById(name)
+            let value = null
+            switch (element.type) {
+              case "number":
+                value = element.value
+                break
+              case "checkbox":
+                value = element.checked
+                break
+              case "text":
+                value = element.textContent
+                break
+            }
+            NetworkTables.putValue(`/SmartDashboard/${name}`, value)
+          } else {
+            let value = NetworkTables.getValue(`/SmartDashboard/${name}`, v.defaultValue)
+            let element = document.getElementById(name)
+            switch (element.type) {
+              case "number":
+                element.value = value
+                break
+              case "checkbox":
+                element.checked = value
+                break
+              case "text":
+                element.textContent = value
+                break
+            }
+          }
+        }
+      }
+    }
+    if (document.getElementById('refreshRate') != null && document.getElementById('refreshRate').textContent != refreshRate) {
+      refresher.wait = document.getElementById('refreshRate').textContent;
+    }
+  }
+
 var scanVars = (prefix, id) => {
     let vars = {}
     let vars2 = {}

@@ -26,7 +26,6 @@ var NetworkTables = // eslint-disable-line no-unused-vars
       delete keys[mesg.key]
     })
     ipc.on('update', (ev, mesg) => {
-      console.log(mesg)
       let temp = keys[mesg.key]
       temp.flags = mesg.flags
       temp.val = mesg.val
@@ -62,10 +61,10 @@ var NetworkTables = // eslint-disable-line no-unused-vars
     }
     var d3_map_proto = '__proto__' // eslint-disable-line camelcase
     var d3_map_zero = '\x00' // eslint-disable-line camelcase
-    function d3_map_escape (key) { // eslint-disable-line camelcase
+    function d3_map_escape(key) { // eslint-disable-line camelcase
       return (key += '') === d3_map_proto || key[0] === d3_map_zero ? d3_map_zero + encodeURIComponent(key) : encodeURIComponent(key) // eslint-disable-line camelcase
     }
-    function d3_map_unescape (key) { // eslint-disable-line camelcase
+    function d3_map_unescape(key) { // eslint-disable-line camelcase
       return (key += '')[0] === d3_map_zero ? decodeURIComponent(key.slice(1)) : decodeURIComponent(key) // eslint-disable-line camelcase
     }
     return {
@@ -76,7 +75,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * @param {(connected: boolean) => any} f a function that will be called with a single boolean parameter that indicates whether the robot is connected
        * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current robot connection state
        */
-      addRobotConnectionListener (f, immediateNotify) {
+      addRobotConnectionListener(f, immediateNotify) {
         if (typeof f !== 'function') return new Error('Invalid argument')
 
         connectionListeners.push(f)
@@ -87,7 +86,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * @param {(key: string, value: any, isNew: boolean) => any} f When any key changes, this function will be called with the following parameters; key: key name for entry, value: value of entry, isNew: If true, the entry has just been created
        * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current value of all keys
        */
-      addGlobalListener (f, immediateNotify) {
+      addGlobalListener(f, immediateNotify) {
         if (typeof f !== 'function') return new Error('Invalid argument')
 
         globalListeners.push(f)
@@ -104,7 +103,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * @param {(key: string, value: any, isNew: boolean) => any} f When the key changes, this function will be called with the following parameters; key: key name for entry, value: value of entry, isNew: If true, the entry has just been created
        * @param {boolean} [immediateNotify] If true, the function will be immediately called with the current value of the specified key
        */
-      addKeyListener (key, f, immediateNotify) {
+      addKeyListener(key, f, immediateNotify) {
         if (typeof key !== 'string' || typeof f !== 'function') return new Error('Valid Arguments are (string, function)')
 
         if (typeof keyListeners[key] !== 'undefined') {
@@ -122,7 +121,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * @param {string} key A networktables key
        * @returns true if a key is present in NetworkTables, false otherwise
        */
-      containsKey (key) {
+      containsKey(key) {
         if (typeof f !== 'string') return false
         return key in keys
       },
@@ -130,7 +129,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * Get all keys in the NetworkTables
        * @returns all the keys in the NetworkTables
        */
-      getKeys () {
+      getKeys() {
         return Object.keys(keys)
       },
       /**
@@ -139,7 +138,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * @param {any} [defaultValue] If the key isn’t present in the table, return this instead
        * @returns value of key if present, undefined or defaultValue otherwise
        */
-      getValue (key, defaultValue) {
+      getValue(key, defaultValue) {
         if (typeof key !== 'string') return new Error('Invalid Argument')
 
         if (typeof keys[key] !== 'undefined') {
@@ -151,13 +150,13 @@ var NetworkTables = // eslint-disable-line no-unused-vars
       /**
        * @returns null if the robot is not connected, or a string otherwise
        */
-      getRobotAddress () {
+      getRobotAddress() {
         return connected ? robotAddress : null
       },
       /**
        * @returns true if the robot is connected
        */
-      isRobotConnected () {
+      isRobotConnected() {
         return connected
       },
       /**
@@ -166,7 +165,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * @param value The value to set (see warnings)
        * @returns True if the websocket is open, False otherwise
        */
-      putValue (key, value) {
+      putValue(key, value) {
         if (typeof key !== 'string') return new Error('Invalid Argument')
 
         if (typeof keys[key] !== 'undefined') {
@@ -181,7 +180,7 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * Creates a new empty map (or hashtable) object and returns it. The map is safe to store NetworkTables keys in.
        * @returns map object, with forEach/get/has/set functions defined. Simlar to a map object when using d3.js
        */
-      create_map () {
+      create_map() {
         return new d3_map() // eslint-disable-line new-cap
       },
       /**
@@ -195,10 +194,8 @@ var NetworkTables = // eslint-disable-line no-unused-vars
        * @param {string} key A networktables key
        * @returns Escaped value
        */
-      keySelector (key) {
+      keySelector(key) {
         return encodeURIComponent(key).replace(/([;&,\.\+\*\~':"\!\^#$%@\[\]\(\)=>\|])/g, '\\$1') // eslint-disable-line no-useless-escape
       }
     }
   })()
-
-module.exports = NetworkTables

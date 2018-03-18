@@ -32,6 +32,7 @@ let refresh = () => {
     scanVars('/SmartDashboard/vars/', 'dashboard-vars')
     scanVars('/SmartDashboard/vars2/', 'dashboard-vars2')
   }
+  scan('', displayValues)
   updateCommands()
   updateConnection()
 }
