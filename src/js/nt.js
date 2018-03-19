@@ -1,16 +1,3 @@
-var displayValues = [
-    {
-      name: 'drivePosControl',
-      values: [
-        { name: 'target', defaultValue: 0, input: true },
-        { name: 'maxSpeed', defaultValue: 0, input: true },
-        { name: 'minSpeed', defaultValue: 0, input: true },
-        { name: 'rate', defaultValue: 0, input: true },
-        { name: 'deadband', defaultValue: 0, input: true }
-      ]
-    }
-]
-
 var scan = (parent, values) => {
     for (let v of values) {
       let name = `${parent}${v.name}`

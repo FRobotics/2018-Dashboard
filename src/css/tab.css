@@ -1,0 +1,21 @@
+/* Style the tab */
+.tab {
+    overflow: hidden;
+    height: 80%;
+    position: absolute;
+    height:10vw;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab input[type="button"] {
+    cursor: pointer;
+    height: 9vh;
+    width: 10vw;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    position: absolute;
+    margin-top: 10vh;
+}

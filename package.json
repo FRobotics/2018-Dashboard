@@ -25,6 +25,7 @@
     "electron-packager": "^11.0.0"
   },
   "dependencies": {
+    "npm": "^5.7.1",
     "wpilib-nt-client": "^1.5.2"
   }
 }
