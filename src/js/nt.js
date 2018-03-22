@@ -1,47 +1,47 @@
 var scan = (parent, values) => {
     for (let v of values) {
-      let name = `${parent}${v.name}`
-      if (v.values != null) {
-        scan(`${name}/`, v.values)
-      } else {
-        if (document.getElementById(name) != null) {
-          if (v.input) {
-            let element = document.getElementById(name)
-            let value = null
-            switch (element.type) {
-              case "number":
-                value = element.value
-                break
-              case "checkbox":
-                value = element.checked
-                break
-              case "text":
-                value = element.textContent
-                break
+        let name = `${parent}${v.name}`
+        if (v.values != null) {
+            scan(`${name}/`, v.values)
+        } else {
+            if (document.getElementById(name) != null) {
+                if (v.input) {
+                    let element = document.getElementById(name)
+                    let value = null
+                    switch (element.type) {
+                        case "number":
+                            value = element.value
+                            break
+                        case "checkbox":
+                            value = element.checked
+                            break
+                        case "text":
+                            value = element.textContent
+                            break
+                    }
+                    NetworkTables.putValue(`/SmartDashboard/${name}`, value)
+                } else {
+                    let value = NetworkTables.getValue(`/SmartDashboard/${name}`, v.defaultValue)
+                    let element = document.getElementById(name)
+                    switch (element.type) {
+                        case "number":
+                            element.value = value
+                            break
+                        case "checkbox":
+                            element.checked = value
+                            break
+                        case "text":
+                            element.textContent = value
+                            break
+                    }
+                }
             }
-            NetworkTables.putValue(`/SmartDashboard/${name}`, value)
-          } else {
-            let value = NetworkTables.getValue(`/SmartDashboard/${name}`, v.defaultValue)
-            let element = document.getElementById(name)
-            switch (element.type) {
-              case "number":
-                element.value = value
-                break
-              case "checkbox":
-                element.checked = value
-                break
-              case "text":
-                element.textContent = value
-                break
-            }
-          }
         }
-      }
     }
     if (document.getElementById('refreshRate') != null && document.getElementById('refreshRate').textContent != refreshRate) {
-      refresher.wait = document.getElementById('refreshRate').textContent;
+        refresher.wait = document.getElementById('refreshRate').textContent;
     }
-  }
+}
 
 var scanVars = (prefix, id) => {
     let vars = {}
@@ -86,7 +86,7 @@ var scanVars = (prefix, id) => {
             let name = key.toLowerCase().replace('_', ' ')
             name = name.charAt(0).toUpperCase() + name.slice(1)
             if (obj[key].path != null) {
-                varsHtml += `  ${name}\n`
+                varsHtml += `<div style="height: 30px;">\n  ${name}\n`
                 let value = NetworkTables.getValue(`${obj[key].path}`)
                 switch (typeof (value)) {
                     case "number":
@@ -94,7 +94,7 @@ var scanVars = (prefix, id) => {
                         break
                     case "boolean":
                         varsHtml += `  <label class="switch">\n`
-                            + `  <input type="checkbox" checked=${value}>\n`
+                            + `  <input type="checkbox"${value ? ' checked' : ''}>\n`
                             + `  <span class="slider"></span>\n`
                             + `  </label>\n`
                         break
@@ -102,7 +102,7 @@ var scanVars = (prefix, id) => {
                         varsHtml += `  <input type="text" textContent="${value}" disabled>\n`
                         break
                 }
-                varsHtml += '<br>\n'
+                varsHtml += '</div>\n'
             } else {
                 varsHtml += `<div class="inner-group">\n`
                 varsHtml += `  <h2>${name}</h2>\n`
@@ -115,8 +115,8 @@ var scanVars = (prefix, id) => {
     document.getElementById(id).innerHTML = varsHtml
 }
 
-NetworkTables.addKeyListener('/robot/time', (key, value) => { // eslint-disable-line no-undef
+NetworkTables.addKeyListener('/robot/time', (key, value) => {
     // This is an example of how a dashboard could display the remaining time in a match.
     // We assume here that value is an integer representing the number of seconds left.
-  document.getElementById('timer').innerHTML = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60
+    document.getElementById('timer').innerHTML = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60
 })

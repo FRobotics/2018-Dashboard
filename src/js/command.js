@@ -17,7 +17,7 @@ let commandTypes = {
     setArm: {
         name: 'Set Arm',
         vars: {
-            'open': 'boolean',
+            'open': 'checkbox',
             'wait': 'number'
         }
     }
@@ -46,7 +46,17 @@ var updateCommandInfo = (command) => {
     let type = commandTypes[Object.keys(commandTypes).find(type => commandTypes[type].name === command)]
     let html = ''
     for (let v in type.vars) {
-        html += `<p>${v} <input type="${type.vars[v]}" class="auto-var"></p>\n`
+        let value
+        if (type.vars[v] === 'checkbox') {
+            value =
+                '<label class="switch">\
+                    <input type="checkbox" class="auto-var">\
+                    <span class="slider"></span>\
+                </label>'
+        } else {
+            value = `<input type="${type.vars[v]}" class="auto-var">`
+        }
+        html += `<div style="height: 30px;">${v} ${value}</div>\n`
     }
     document.getElementById("auto-body").innerHTML = html
 }
@@ -73,10 +83,10 @@ document.getElementById('add-command').onclick = () => {
         }
     }
     commands.push(parts.join(':'))
-    NetworkTables.putValue("commands", commands)
+    NetworkTables.putValue("/SmartDashboard/commands", commands)
 }
 
 document.getElementById('reset-commands').onclick = () => {
     commands = []
-    NetworkTables.putValue("commands", commands)
+    NetworkTables.putValue("/SmartDashboard/commands", commands)
 }
