@@ -26,16 +26,22 @@ function onRobotConnection(connected) {
 
 // On click try to connect and disable the input and the button
 connect.onclick = () => {
-  ipc.send('connect', `roborio-${document.getElementById('team-number').value}-frc.local`);
-  connect.disabled = true
-  connect.value = 'connecting...'
+  if (connect.value === 'connect') {
+    ipc.send('connect', `roborio-${document.getElementById('team-number').value}-frc.local`);
+    connect.disabled = true
+    connect.value = 'connecting...'
+  } else {
+    ipc.send('disconnect')
+    connect.disabled = false
+    connect.value = 'connect'
+  }
 }
 
 var updateConnection = () => {
   if (
     document.getElementById("team-number").value.toString().length > 0
-    && !robotConnected
     && connect.value !== 'connecting...'
   ) connect.disabled = false
   else connect.disabled = true
+  if (robotConnected) connect.value = 'disconnect'
 }

@@ -118,5 +118,35 @@ var scanVars = (prefix, id) => {
 NetworkTables.addKeyListener('/robot/time', (key, value) => {
     // This is an example of how a dashboard could display the remaining time in a match.
     // We assume here that value is an integer representing the number of seconds left.
+    //no u
     document.getElementById('timer').innerHTML = value < 0 ? '0:00' : Math.floor(value / 60) + ':' + (value % 60 < 10 ? '0' : '') + value % 60
 })
+
+let addLight = (id, key) => {
+    NetworkTables.addKeyListener(key, (key, value) => {
+        let color = '#000000'
+        if (value) color = '#00dd00'
+        else color = '#dd0000'
+        document.getElementById(id).style = `background-color: ${color}`
+    })
+}
+
+let addValue = (id, key) => {
+    NetworkTables.addKeyListener(key, (key, value) => {
+        document.getElementById(id).value = value
+    })
+}
+
+addLight('high-gear-light', '/SmartDashboard/vars/motors/highGear')
+addLight('slow-mode-light', '/SmartDashboard/vars/motors/slowMode')
+addLight('elevator-brake-light', '/SmartDashboard/vars/elevator/brake')
+addLight('teleop-light', '/SmartDashboard/vars/teleopEnabled') //this should probably change to a default key
+addLight('go-climb-light', '/SmartDashboard/vars/goClimb')
+
+addValue('arm-state', '/SmartDashboard/vars/arm/state')
+addValue('elevator-height', '/SmartDashboard/vars/elevator/height')
+addValue('gyro', '/SmartDashboard/vars/gyro')
+
+document.getElementById('testingMode').onchange = (ev) => {
+    NetworkTables.putValue('/SmartDashboard/testingMode', document.getElementById('testingMode').checked)
+}

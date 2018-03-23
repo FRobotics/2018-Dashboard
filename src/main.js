@@ -73,6 +73,9 @@ function createWindow() {
       client.start(callback, address)
     }
   })
+  ipc.on('disconnect', (ev) => {
+    client.stop()
+  })
   ipc.on('add', (ev, mesg) => {
     client.Assign(mesg.val, mesg.key, (mesg.flags & 1) === 1)
   })
