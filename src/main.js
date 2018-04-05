@@ -63,7 +63,6 @@ function createWindow() {
   })
   // When the user chooses the address of the bot than try to connect
   ipc.on('connect', (ev, address, port) => {
-    console.log(`Trying to connect to ${address}` + (port ? ':' + port : ''))
     let callback = (connected, err) => {
       mainWindow.webContents.send('connected', connected)
     }

@@ -37,6 +37,7 @@ insertCards([
 
 insertCards([
     { file: 'connection', id: 'connection-div' },
+    { file: 'side'},
     { file: 'timer' },
     { file: 'testing' },
     { file: 'positionControl' }

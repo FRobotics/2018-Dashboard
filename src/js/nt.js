@@ -150,3 +150,9 @@ addValue('gyro', '/SmartDashboard/vars/gyro')
 document.getElementById('testingMode').onchange = (ev) => {
     NetworkTables.putValue('/SmartDashboard/testingMode', document.getElementById('testingMode').checked)
 }
+
+document.getElementById('side').onchange = (ev) => {
+    NetworkTables.putValue('/SmartDashboard/position', document.getElementById('side').value)
+}
+
+addValue('side-value', '/SmartDashboard/position')
